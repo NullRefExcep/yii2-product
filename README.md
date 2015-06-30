@@ -1,1 +1,1 @@
-# yii2-core
+# yii2-product
