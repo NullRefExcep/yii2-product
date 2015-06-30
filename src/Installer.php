@@ -8,41 +8,50 @@
 namespace nullref\product;
 
 
-use Composer\Installer\LibraryInstaller;
-use Composer\Package\PackageInterface;
-use Composer\Repository\InstalledRepositoryInterface;
-use yii\db\Migration;
+use Composer\Installer\PackageEvent;
+use nullref\core\components\ModuleInstaller;
 use yii\db\Schema;
 
-class Installer extends LibraryInstaller
+class Installer extends ModuleInstaller
 {
-    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
-    {
-        $tableOptions = null;
-        if (\Yii::$app->db->driverName === 'mysql') {
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
-        }
-        $migration = new Migration();
-        $migration->createTable('{{%product}}', [
-            'id' => Schema::TYPE_PK,
-            'title' => Schema::TYPE_STRING,
-            'image' => Schema::TYPE_STRING,
-            'description' => Schema::TYPE_TEXT,
-            'price' => Schema::TYPE_DECIMAL,
-            'status' => Schema::TYPE_INTEGER,
-            'createdAt' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updatedAt' => Schema::TYPE_INTEGER . ' NOT NULL',
-        ], $tableOptions);
+    protected $tableName = '{{%product}}';
 
-        parent::install($repo, $package);
+    /**
+     * Create table
+     * @param PackageEvent $event
+     */
+    public function install(PackageEvent $event)
+    {
+        if (!$this->tableExist($this->tableName)) {
+            $tableOptions = null;
+            if (\Yii::$app->db->driverName === 'mysql') {
+                $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
+            }
+            $this->createTable($this->tableName, [
+                'id' => Schema::TYPE_PK,
+                'title' => Schema::TYPE_STRING,
+                'image' => Schema::TYPE_STRING,
+                'description' => Schema::TYPE_TEXT,
+                'price' => Schema::TYPE_DECIMAL,
+                'status' => Schema::TYPE_INTEGER,
+                'createdAt' => Schema::TYPE_INTEGER . ' NOT NULL',
+                'updatedAt' => Schema::TYPE_INTEGER . ' NOT NULL',
+            ], $tableOptions);
+        }
+
+        parent::install($event);
     }
 
-    public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
+    /**
+     * Drop table
+     * @param PackageEvent $event
+     */
+    public function uninstall(PackageEvent $event)
     {
-        $migration = new Migration();
-        $migration->dropTable('{{%product}}');
-
-        parent::uninstall($repo, $package);
+        if ($this->tableExist($this->tableName)) {
+            $this->dropTable('{{%product}}');
+        }
+        parent::uninstall($event);
     }
 
 

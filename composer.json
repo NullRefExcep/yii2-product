@@ -13,7 +13,8 @@
             "nullref\\product\\": "src/"
         }
     },
-    "extra" : {
-        "class" : "nullref\\product\\Installer"
+    "scripts": {
+        "post-package-install": "nullref\\product\\Installer::install",
+        "pre-package-uninstall": "nullref\\product\\Installer::uninstall"
     }
 }

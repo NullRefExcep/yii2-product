@@ -35,6 +35,11 @@ class Product extends ActiveRecord implements IProduct
         return $this->id;
     }
 
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     /**
      * @return ProductQuery
      * @throws \yii\base\InvalidConfigException

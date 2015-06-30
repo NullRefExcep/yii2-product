@@ -2,8 +2,6 @@
 
 namespace nullref\product;
 
-use nullref\core\behaviors\AddAction;
-use yii\base\ActionFilter;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 
@@ -14,8 +12,9 @@ use yii\base\BootstrapInterface;
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
-    public $productModelClass = '';
-    public $productQueryModelClass = '';
+    public $productModelClass = 'nullref\\product\\models\\Product';
+    public $productQueryModelClass = 'nullref\\product\\models\\ProductQuery';
+
     /**
      * Bootstrap method to be called during application bootstrap stage.
      * @param Application $app the application currently running
