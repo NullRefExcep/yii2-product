@@ -1,0 +1,103 @@
+<?php
+
+namespace nullref\product\models;
+
+use nullref\product\Module;
+use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+
+/**
+ * This is the model class for table "{{%product}}".
+ *
+ * @property integer $id
+ * @property string $title
+ * @property string $image
+ * @property string $description
+ * @property string $price
+ * @property integer $status
+ * @property integer $createdAt
+ * @property integer $updatedAt
+ *
+ */
+class Product extends ActiveRecord implements IProduct
+{
+    const STATUS_ENABLE = 1;
+    const STATUS_DISABLE = 1;
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return ProductQuery
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function find()
+    {
+        /** @var Module $module */
+        $module = Yii::$app->getModule('product');
+        $className = $module->productQueryModelClass;
+        return new $className(get_called_class());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%product}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['description'], 'string'],
+            [['status'], 'integer'],
+            [['amount'], 'integer', 'min' => 0],
+            [['price'], 'number'],
+            [['price', 'title'], 'required'],
+            [['createdAt', 'updatedAt', 'categoriesList'], 'safe'],
+            [['title', 'image'], 'string', 'max' => 255]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('catalog', 'ID'),
+            'title' => Yii::t('catalog', 'Title'),
+            'image' => Yii::t('catalog', 'Image'),
+            'picture' => Yii::t('catalog', 'Image'),
+            'description' => Yii::t('catalog', 'Description'),
+            'price' => Yii::t('catalog', 'Price'),
+            'status' => Yii::t('catalog', 'Status'),
+            'createdAt' => Yii::t('catalog', 'Created At'),
+            'updatedAt' => Yii::t('catalog', 'Updated At'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'createdAt',
+                'updatedAtAttribute' => 'updatedAt',
+            ],
+        ]);
+    }
+
+}

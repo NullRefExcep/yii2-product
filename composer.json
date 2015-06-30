@@ -1,0 +1,19 @@
+{
+    "name": "nullref/yii2-product",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": ">=2.0.0",
+        "nullref/yii2-core": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "nullref\\product\\": "src/"
+        }
+    },
+    "extra" : {
+        "class" : "nullref\\product\\Installer"
+    }
+}
