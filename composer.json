@@ -12,9 +12,5 @@
         "psr-4": {
             "nullref\\product\\": "src/"
         }
-    },
-    "scripts": {
-        "post-package-install": "nullref\\product\\Installer::install",
-        "pre-package-uninstall": "nullref\\product\\Installer::uninstall"
     }
 }
