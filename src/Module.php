@@ -23,11 +23,13 @@ class Module extends BaseModule implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-
+        $path = \Yii::getAlias('@app/views/product');
     }
 
     public function createModel()
     {
         return \Yii::createObject($this->productModelClass);
     }
+
+
 }
