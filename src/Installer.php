@@ -8,7 +8,6 @@
 namespace nullref\product;
 
 
-use Composer\Installer\PackageEvent;
 use nullref\core\components\ModuleInstaller;
 use yii\db\Schema;
 
@@ -18,9 +17,8 @@ class Installer extends ModuleInstaller
 
     /**
      * Create table
-     * @param PackageEvent $event
      */
-    public function install(PackageEvent $event)
+    public function install()
     {
         if (!$this->tableExist($this->tableName)) {
             $tableOptions = null;
@@ -39,19 +37,18 @@ class Installer extends ModuleInstaller
             ], $tableOptions);
         }
 
-        parent::install($event);
+        parent::install();
     }
 
     /**
      * Drop table
-     * @param PackageEvent $event
      */
-    public function uninstall(PackageEvent $event)
+    public function uninstall()
     {
         if ($this->tableExist($this->tableName)) {
-            $this->dropTable('{{%product}}');
+            $this->dropTable($this->tableName);
         }
-        parent::uninstall($event);
+        parent::uninstall();
     }
 
 
