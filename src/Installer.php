@@ -13,6 +13,13 @@ use yii\db\Schema;
 
 class Installer extends ModuleInstaller
 {
+    public function getModuleId()
+    {
+        return 'product';
+    }
+
+    public $updateConfig = true;
+
     protected $tableName = '{{%product}}';
 
     /**
