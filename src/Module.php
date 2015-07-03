@@ -2,6 +2,7 @@
 
 namespace nullref\product;
 
+use nullref\core\components\EntityManager;
 use nullref\core\interfaces\IAdminModule;
 use Yii;
 use yii\base\Module as BaseModule;
@@ -13,12 +14,20 @@ use yii\base\Module as BaseModule;
  */
 class Module extends BaseModule implements IAdminModule
 {
-    public $controllerNamespace = 'nullref\product\controllers';
-
     public $productModelClass = 'nullref\\product\\models\\Product';
     public $productQueryModelClass = 'nullref\\product\\models\\ProductQuery';
     public $productSearchModelClass = 'nullref\\product\\models\\ProductSearch';
 
+    public function init()
+    {
+        parent::init();
+        $this->setComponents(['productManager' => [
+            'class' => EntityManager::className(),
+            'modelClass' => $this->productModelClass,
+            'queryClass' => $this->productQueryModelClass,
+            'searchModelClass' => $this->productSearchModelClass,
+        ]]);
+    }
     public static function getAdminMenu()
     {
         return [
