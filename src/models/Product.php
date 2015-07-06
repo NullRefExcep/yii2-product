@@ -68,10 +68,9 @@ class Product extends ActiveRecord implements IProduct
         return [
             [['description'], 'string'],
             [['status'], 'integer'],
-            [['amount'], 'integer', 'min' => 0],
             [['price'], 'number'],
             [['price', 'title'], 'required'],
-            [['createdAt', 'updatedAt', 'categoriesList'], 'safe'],
+            [['createdAt', 'updatedAt'], 'safe'],
             [['title', 'image'], 'string', 'max' => 255]
         ];
     }

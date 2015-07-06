@@ -8,7 +8,11 @@
 namespace nullref\product;
 
 
+use nullref\core\behaviors\HasOneRelation;
+use nullref\core\components\EntityManager;
 use nullref\core\components\ModuleInstaller;
+use Yii;
+use yii\base\Module;
 use yii\db\Schema;
 
 class Installer extends ModuleInstaller
@@ -58,5 +62,28 @@ class Installer extends ModuleInstaller
         parent::uninstall();
     }
 
+    /**
+     * Add column for category relation if entity has it
+     */
+    public function update()
+    {
+        $module = Yii::$app->getModule($this->moduleId);
+        /** @var Module $module */
+        foreach ($module->getComponents() as $id => $component) {
+            if (is_array($component)) {
+                $component = $module->get($id);
+            }
+            if ($component instanceof EntityManager) {
+                $model = $component->createModel();
+                foreach ($model->behaviors as $behavior) {
+                    if ($behavior instanceof HasOneRelation) {
+                        //@TODO add info message
+                        $this->addColumn($model->tableName(), $behavior->getKeyName(), Schema::TYPE_INTEGER);
+                    }
+                }
+            }
+
+        }
+    }
 
 } 
