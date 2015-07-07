@@ -6,6 +6,7 @@ use nullref\admin\components\AdminController as BaseController;
 use nullref\core\traits\EntityManageble;
 use nullref\product\models\Product;
 use Yii;
+use yii\db\ActiveRecord;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 
@@ -66,6 +67,7 @@ class AdminController extends BaseController
      */
     public function actionCreate()
     {
+        /** @var ActiveRecord $model */
         $model = static::getManager()->createModel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

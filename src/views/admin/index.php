@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel nullref\product\models\ProductSearch */
@@ -23,16 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'title',
-            'image',
-            'description:ntext',
-            'price',
-            // 'status',
-            // 'createdAt',
-            // 'updatedAt',
+            'price:decimal',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -78,7 +78,7 @@ class Installer extends ModuleInstaller
                 foreach ($model->behaviors as $behavior) {
                     if ($behavior instanceof HasOneRelation) {
                         //@TODO add info message
-                        $this->addColumn($model->tableName(), $behavior->getKeyName(), Schema::TYPE_INTEGER);
+                        $this->addColumn($model->tableName(), $behavior->getAttributeName(), Schema::TYPE_INTEGER);
                     }
                 }
             }

@@ -2,10 +2,10 @@
 
 namespace nullref\product\models;
 
+use nullref\core\models\Model as BaseModel;
 use nullref\product\Module;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%product}}".
@@ -20,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property integer $updatedAt
  *
  */
-class Product extends ActiveRecord implements IProduct
+class Product extends BaseModel implements IProduct
 {
     const STATUS_ENABLE = 1;
     const STATUS_DISABLE = 1;
@@ -65,14 +65,14 @@ class Product extends ActiveRecord implements IProduct
      */
     public function rules()
     {
-        return [
+        return array_merge([
             [['description'], 'string'],
             [['status'], 'integer'],
             [['price'], 'number'],
             [['price', 'title'], 'required'],
             [['createdAt', 'updatedAt'], 'safe'],
             [['title', 'image'], 'string', 'max' => 255]
-        ];
+        ], parent::rules());
     }
 
     /**
