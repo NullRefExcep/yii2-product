@@ -7,7 +7,7 @@ use nullref\core\traits\EntityManageble;
 use nullref\product\models\Product;
 use Yii;
 use yii\db\ActiveRecord;
-use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -22,14 +22,8 @@ class AdminController extends BaseController
 
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
+        return array_merge(parent::behaviors(), [
+        ]);
     }
 
     /**

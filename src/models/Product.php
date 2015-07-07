@@ -46,9 +46,8 @@ class Product extends BaseModel implements IProduct
      */
     public static function find()
     {
-        /** @var Module $module */
-        $module = Yii::$app->getModule('product');
-        $className = $module->productQueryModelClass;
+        $manager = Yii::$app->getModule('product')->get('productManager');
+        $className = $manager->getQueryClass();
         return new $className(get_called_class());
     }
 
@@ -80,7 +79,7 @@ class Product extends BaseModel implements IProduct
      */
     public function attributeLabels()
     {
-        return [
+        return array_merge([
             'id' => Yii::t('catalog', 'ID'),
             'title' => Yii::t('catalog', 'Title'),
             'image' => Yii::t('catalog', 'Image'),
@@ -90,7 +89,7 @@ class Product extends BaseModel implements IProduct
             'status' => Yii::t('catalog', 'Status'),
             'createdAt' => Yii::t('catalog', 'Created At'),
             'updatedAt' => Yii::t('catalog', 'Updated At'),
-        ];
+        ], parent::attributeLabels());
     }
 
     public function behaviors()
