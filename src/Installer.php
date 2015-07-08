@@ -8,11 +8,8 @@
 namespace nullref\product;
 
 
-use nullref\core\behaviors\HasOneRelation;
-use nullref\core\components\EntityManager;
 use nullref\core\components\ModuleInstaller;
 use Yii;
-use yii\base\Module;
 use yii\db\Schema;
 
 class Installer extends ModuleInstaller
@@ -41,7 +38,7 @@ class Installer extends ModuleInstaller
                 'title' => Schema::TYPE_STRING,
                 'image' => Schema::TYPE_STRING,
                 'description' => Schema::TYPE_TEXT,
-                'price' => Schema::TYPE_DECIMAL,
+                'price' => Schema::TYPE_DECIMAL . '(10,2)',
                 'status' => Schema::TYPE_INTEGER,
                 'createdAt' => Schema::TYPE_INTEGER . ' NOT NULL',
                 'updatedAt' => Schema::TYPE_INTEGER . ' NOT NULL',
@@ -60,30 +57,6 @@ class Installer extends ModuleInstaller
             $this->dropTable($this->tableName);
         }
         parent::uninstall();
-    }
-
-    /**
-     * Add column for category relation if entity has it
-     */
-    public function update()
-    {
-        $module = Yii::$app->getModule($this->moduleId);
-        /** @var Module $module */
-        foreach ($module->getComponents() as $id => $component) {
-            if (is_array($component)) {
-                $component = $module->get($id);
-            }
-            if ($component instanceof EntityManager) {
-                $model = $component->createModel();
-                foreach ($model->behaviors as $behavior) {
-                    if ($behavior instanceof HasOneRelation) {
-                        //@TODO add info message
-                        $this->addColumn($model->tableName(), $behavior->getAttributeName(), Schema::TYPE_INTEGER);
-                    }
-                }
-            }
-
-        }
     }
 
 } 
