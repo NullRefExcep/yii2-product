@@ -2,10 +2,10 @@
 
 namespace nullref\product\models;
 
+use nullref\core\behaviors\HasOneRelation;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use nullref\product\models\Product;
 
 /**
  * ProductSearch represents the model behind the search form about `nullref\product\models\Product`.
@@ -17,11 +17,17 @@ class ProductSearch extends Product
      */
     public function rules()
     {
-        return [
+        $fields = [];
+        foreach ($this->behaviors as $behavior) {
+            if ($behavior instanceof HasOneRelation) {
+                $fields[] = $behavior->getAttributeName();
+            }
+        }
+        return array_merge([
             [['id', 'status', 'createdAt', 'updatedAt'], 'integer'],
             [['title', 'image', 'description'], 'safe'],
             [['price'], 'number'],
-        ];
+        ], [[$fields, 'safe']]);
     }
 
     /**
@@ -63,6 +69,12 @@ class ProductSearch extends Product
             'createdAt' => $this->createdAt,
             'updatedAt' => $this->updatedAt,
         ]);
+
+        foreach ($this->behaviors as $behavior) {
+            if ($behavior instanceof HasOneRelation) {
+                $query->andFilterWhere([$behavior->getAttributeName() => $this->{$behavior->getAttributeName()}]);
+            }
+        }
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'image', $this->image])
