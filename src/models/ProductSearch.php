@@ -10,7 +10,17 @@ use yii\data\ActiveDataProvider;
 /**
  * ProductSearch represents the model behind the search form about `nullref\product\models\Product`.
  */
-class ProductSearch extends Product
+
+/** A little bit of magic */
+if(class_exists('\app\models\Product')) {
+    class ParentProductSearch extends \app\models\Product {}
+} elseif(class_exists('\app\modules\product\models\Product')) {
+    class ParentProductSearch extends \app\modules\product\models\Product {}
+} else {
+    class ParentProductSearch extends Product {}
+}
+
+class ProductSearch extends ParentProductSearch
 {
     /**
      * @inheritdoc

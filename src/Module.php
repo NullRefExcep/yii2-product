@@ -5,7 +5,7 @@ namespace nullref\product;
 use nullref\core\interfaces\IAdminModule;
 use nullref\product\components\EntityManager;
 use Yii;
-use yii\base\Module as BaseModule;
+use nullref\core\components\Module as BaseModule;
 
 /**
  * @author    Dmytro Karpovych
