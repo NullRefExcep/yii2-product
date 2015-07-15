@@ -3,7 +3,6 @@
 namespace nullref\product\models;
 
 use nullref\core\models\Model as BaseModel;
-use nullref\product\Module;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 

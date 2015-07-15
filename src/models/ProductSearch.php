@@ -3,6 +3,8 @@
 namespace nullref\product\models;
 
 use nullref\core\behaviors\HasOneRelation;
+use nullref\core\behaviors\HasRelation;
+use nullref\core\behaviors\ManyHasOneRelation;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -12,12 +14,18 @@ use yii\data\ActiveDataProvider;
  */
 
 /** A little bit of magic */
-if(class_exists('\app\models\Product')) {
-    class ParentProductSearch extends \app\models\Product {}
-} elseif(class_exists('\app\modules\product\models\Product')) {
-    class ParentProductSearch extends \app\modules\product\models\Product {}
+if (class_exists('\app\models\Product')) {
+    class ParentProductSearch extends \app\models\Product
+    {
+    }
+} elseif (class_exists('\app\modules\product\models\Product')) {
+    class ParentProductSearch extends \app\modules\product\models\Product
+    {
+    }
 } else {
-    class ParentProductSearch extends Product {}
+    class ParentProductSearch extends Product
+    {
+    }
 }
 
 class ProductSearch extends ParentProductSearch
@@ -29,7 +37,7 @@ class ProductSearch extends ParentProductSearch
     {
         $fields = [];
         foreach ($this->behaviors as $behavior) {
-            if ($behavior instanceof HasOneRelation) {
+            if ($behavior instanceof HasRelation) {
                 $fields[] = $behavior->getAttributeName();
             }
         }
@@ -56,9 +64,9 @@ class ProductSearch extends ParentProductSearch
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params = [])
     {
-        $query = Product::find();
+        $query = ParentProductSearch::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -67,8 +75,6 @@ class ProductSearch extends ParentProductSearch
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
@@ -81,7 +87,7 @@ class ProductSearch extends ParentProductSearch
         ]);
 
         foreach ($this->behaviors as $behavior) {
-            if ($behavior instanceof HasOneRelation) {
+            if ($behavior instanceof ManyHasOneRelation) {
                 $query->andFilterWhere([$behavior->getAttributeName() => $this->{$behavior->getAttributeName()}]);
             }
         }
