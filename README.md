@@ -1,4 +1,4 @@
-# Yii2 Product
+Yii2 Product
 ===============
 [![Latest Stable Version](https://poser.pugx.org/nullref/yii2-product/v/stable)](https://packagist.org/packages/nullref/yii2-product) [![Total Downloads](https://poser.pugx.org/nullref/yii2-product/downloads)](https://packagist.org/packages/nullref/yii2-product) [![Latest Unstable Version](https://poser.pugx.org/nullref/yii2-product/v/unstable)](https://packagist.org/packages/nullref/yii2-product) [![License](https://poser.pugx.org/nullref/yii2-product/license)](https://packagist.org/packages/nullref/yii2-product)
 
