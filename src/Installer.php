@@ -10,7 +10,6 @@ namespace nullref\product;
 
 use nullref\core\components\ModuleInstaller;
 use Yii;
-use yii\db\Schema;
 
 class Installer extends ModuleInstaller
 {

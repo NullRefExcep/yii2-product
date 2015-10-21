@@ -7,7 +7,6 @@ use nullref\core\traits\EntityManageble;
 use nullref\product\models\Product;
 use Yii;
 use yii\db\ActiveRecord;
-use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 
 /**

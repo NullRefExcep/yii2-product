@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="product-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
+
     <?= $form->errorSummary($model) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>

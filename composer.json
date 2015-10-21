@@ -12,5 +12,8 @@
         "psr-4": {
             "nullref\\product\\": "src/"
         }
+    },
+    "extra": {
+        "bootstrap":"nullref\\category\\Bootstrap"
     }
 }

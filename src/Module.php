@@ -2,10 +2,10 @@
 
 namespace nullref\product;
 
+use nullref\core\components\Module as BaseModule;
 use nullref\core\interfaces\IAdminModule;
 use nullref\product\components\EntityManager;
 use Yii;
-use nullref\core\components\Module as BaseModule;
 
 /**
  * @author    Dmytro Karpovych
@@ -14,6 +14,8 @@ use nullref\core\components\Module as BaseModule;
  */
 class Module extends BaseModule implements IAdminModule
 {
+    public $productModel = 'nullref\product\models\Product';
+
     public function init()
     {
         parent::init();
