@@ -47,9 +47,7 @@ class Product extends BaseModel implements IProduct
      */
     public static function find()
     {
-        $manager = Yii::$app->getModule('product')->get('productManager');
-        $className = $manager->getQueryClass();
-        return new $className(get_called_class());
+        return parent::find()->where(['deletedAt' => null]);
     }
 
     /**
