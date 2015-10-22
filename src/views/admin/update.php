@@ -18,6 +18,6 @@ $this->params['breadcrumbs'][] = Yii::t('product', 'Update');
 
     <?= $this->render('_form', [
         'model' => $model,
-    ], $this->context) ?>
+    ]) ?>
 
 </div>

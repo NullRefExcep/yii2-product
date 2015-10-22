@@ -25,7 +25,7 @@ class m150920_102400_create_product_table extends Migration
                 'status' => Schema::TYPE_INTEGER,
                 'createdAt' => Schema::TYPE_INTEGER . ' NOT NULL',
                 'updatedAt' => Schema::TYPE_INTEGER . ' NOT NULL',
-                'deleted' => Schema::TYPE_SMALLINT,
+                'deletedAt' => Schema::TYPE_INTEGER,
             ], $tableOptions);
         }
     }

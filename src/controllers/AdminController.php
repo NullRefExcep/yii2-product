@@ -5,6 +5,7 @@ namespace nullref\product\controllers;
 use nullref\admin\components\AdminController as BaseController;
 use nullref\core\traits\EntityManageble;
 use nullref\product\models\Product;
+use nullref\product\models\ProductSearch;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\NotFoundHttpException;
@@ -14,11 +15,6 @@ use yii\web\NotFoundHttpException;
  */
 class AdminController extends BaseController
 {
-    public $entityModuleId = 'product';
-    public $entityManagerName = 'productManager';
-
-    use EntityManageble;
-
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
@@ -31,7 +27,7 @@ class AdminController extends BaseController
      */
     public function actionIndex()
     {
-        $searchModel = static::getManager()->createSearchModel();
+        $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +43,7 @@ class AdminController extends BaseController
      */
     public function actionView($id)
     {
-        $model = static::getManager()->findOne($id);
+        $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $model,
         ]);
@@ -60,15 +56,13 @@ class AdminController extends BaseController
      */
     public function actionCreate()
     {
-        /** @var ActiveRecord $model */
-        $model = static::getManager()->createModel();
+        $model = Yii::createObject(Product::className());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'manager' => $this->getManager(),
             ]);
         }
     }
@@ -81,14 +75,13 @@ class AdminController extends BaseController
      */
     public function actionUpdate($id)
     {
-        $model = static::getManager()->findOne($id);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'manager' => $this->getManager(),
             ]);
         }
     }
@@ -101,7 +94,7 @@ class AdminController extends BaseController
      */
     public function actionDelete($id)
     {
-        static::getManager()->delete(static::getManager()->findOne($id));
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -115,7 +108,7 @@ class AdminController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = static::getManager()->findOne($id)) !== null) {
+        if (($model = Product::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

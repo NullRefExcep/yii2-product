@@ -2,6 +2,7 @@
 
 namespace nullref\product\models;
 
+use nullref\core\behaviors\SoftDelete;
 use nullref\core\models\Model as BaseModel;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -17,6 +18,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $status
  * @property integer $createdAt
  * @property integer $updatedAt
+ * @property integer $deletedAt
  *
  */
 class Product extends BaseModel implements IProduct
@@ -94,10 +96,13 @@ class Product extends BaseModel implements IProduct
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
-            [
+            'timestamp' =>[
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'createdAt',
                 'updatedAtAttribute' => 'updatedAt',
+            ],
+            'soft-delete' => [
+                'class' => SoftDelete::className(),
             ],
         ]);
     }
