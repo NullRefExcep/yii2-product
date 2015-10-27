@@ -3,11 +3,9 @@
 namespace nullref\product\controllers;
 
 use nullref\admin\components\AdminController as BaseController;
-use nullref\core\traits\EntityManageble;
 use nullref\product\models\Product;
 use nullref\product\models\ProductSearch;
 use Yii;
-use yii\db\ActiveRecord;
 use yii\web\NotFoundHttpException;
 
 /**

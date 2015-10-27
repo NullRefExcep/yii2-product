@@ -94,7 +94,7 @@ class Product extends BaseModel implements IProduct
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
-            'timestamp' =>[
+            'timestamp' => [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'createdAt',
                 'updatedAtAttribute' => 'updatedAt',
