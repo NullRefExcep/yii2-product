@@ -79,15 +79,15 @@ class Product extends BaseModel implements IProduct
     public function attributeLabels()
     {
         return array_merge([
-            'id' => Yii::t('catalog', 'ID'),
-            'title' => Yii::t('catalog', 'Title'),
-            'image' => Yii::t('catalog', 'Image'),
-            'picture' => Yii::t('catalog', 'Image'),
-            'description' => Yii::t('catalog', 'Description'),
-            'price' => Yii::t('catalog', 'Price'),
-            'status' => Yii::t('catalog', 'Status'),
-            'createdAt' => Yii::t('catalog', 'Created At'),
-            'updatedAt' => Yii::t('catalog', 'Updated At'),
+            'id' => Yii::t('product', 'ID'),
+            'title' => Yii::t('product', 'Title'),
+            'image' => Yii::t('product', 'Image'),
+            'picture' => Yii::t('product', 'Image'),
+            'description' => Yii::t('product', 'Description'),
+            'price' => Yii::t('product', 'Price'),
+            'status' => Yii::t('product', 'Status'),
+            'createdAt' => Yii::t('product', 'Created At'),
+            'updatedAt' => Yii::t('product', 'Updated At'),
         ], parent::attributeLabels());
     }
 
