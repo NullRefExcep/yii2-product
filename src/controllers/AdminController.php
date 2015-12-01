@@ -2,21 +2,29 @@
 
 namespace nullref\product\controllers;
 
-use nullref\admin\components\AdminController as BaseController;
+use nullref\core\interfaces\IAdminController;
 use nullref\product\models\Product;
 use nullref\product\models\ProductSearch;
 use Yii;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
  * AdminController implements the CRUD actions for Product model.
  */
-class AdminController extends BaseController
+class AdminController extends Controller implements IAdminController
 {
     public function behaviors()
     {
-        return array_merge(parent::behaviors(), [
-        ]);
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
+                ],
+            ],
+        ];
     }
 
     /**
