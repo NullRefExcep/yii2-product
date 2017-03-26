@@ -96,8 +96,8 @@ class Product extends BaseModel implements IProduct
         return array_merge(parent::behaviors(), [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'created_atAttribute' => 'created_at',
-                'updated_atAttribute' => 'updated_at',
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
             ],
             'soft-delete' => [
                 'class' => SoftDelete::className(),
