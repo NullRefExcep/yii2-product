@@ -16,15 +16,32 @@ use yii\behaviors\TimestampBehavior;
  * @property string $description
  * @property string $price
  * @property integer $status
- * @property integer $createdAt
- * @property integer $updatedAt
- * @property integer $deletedAt
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property integer $deleted_at
  *
  */
 class Product extends BaseModel implements IProduct
 {
     const STATUS_ENABLE = 1;
     const STATUS_DISABLE = 1;
+
+    /**
+     * @return ProductQuery
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function find()
+    {
+        return parent::find()->where(['deleted_at' => null]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%product}}';
+    }
 
     public function getPrice()
     {
@@ -42,23 +59,6 @@ class Product extends BaseModel implements IProduct
     }
 
     /**
-     * @return ProductQuery
-     * @throws \yii\base\InvalidConfigException
-     */
-    public static function find()
-    {
-        return parent::find()->where(['deletedAt' => null]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return '{{%product}}';
-    }
-
-    /**
      * @inheritdoc
      */
     public function rules()
@@ -68,7 +68,7 @@ class Product extends BaseModel implements IProduct
             [['status'], 'integer'],
             [['price'], 'number'],
             [['price', 'name'], 'required'],
-            [['createdAt', 'updatedAt'], 'safe'],
+            [['created_at', 'updated_at'], 'safe'],
             [['name', 'image'], 'string', 'max' => 255]
         ], parent::rules());
     }
@@ -86,8 +86,8 @@ class Product extends BaseModel implements IProduct
             'description' => Yii::t('product', 'Description'),
             'price' => Yii::t('product', 'Price'),
             'status' => Yii::t('product', 'Status'),
-            'createdAt' => Yii::t('product', 'Created At'),
-            'updatedAt' => Yii::t('product', 'Updated At'),
+            'created_at' => Yii::t('product', 'Created At'),
+            'updated_at' => Yii::t('product', 'Updated At'),
         ], parent::attributeLabels());
     }
 
@@ -96,11 +96,12 @@ class Product extends BaseModel implements IProduct
         return array_merge(parent::behaviors(), [
             'timestamp' => [
                 'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'createdAt',
-                'updatedAtAttribute' => 'updatedAt',
+                'created_atAttribute' => 'created_at',
+                'updated_atAttribute' => 'updated_at',
             ],
             'soft-delete' => [
                 'class' => SoftDelete::className(),
+                'attribute' => 'deleted_at',
             ],
         ]);
     }

@@ -42,7 +42,7 @@ class ProductSearch extends ParentProductSearch
             }
         }
         return array_merge([
-            [['id', 'status', 'createdAt', 'updatedAt'], 'integer'],
+            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['name', 'image', 'description'], 'safe'],
             [['price'], 'number'],
         ], [[$fields, 'safe']]);
@@ -82,8 +82,8 @@ class ProductSearch extends ParentProductSearch
             'id' => $this->id,
             'price' => $this->price,
             'status' => $this->status,
-            'createdAt' => $this->createdAt,
-            'updatedAt' => $this->updatedAt,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
         foreach ($this->behaviors as $behavior) {

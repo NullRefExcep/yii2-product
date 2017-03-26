@@ -40,8 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'price',
             'status',
-            'createdAt',
-            'updatedAt',
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
     ]) ?>
 

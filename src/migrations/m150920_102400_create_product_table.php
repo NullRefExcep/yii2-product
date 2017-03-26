@@ -19,9 +19,9 @@ class m150920_102400_create_product_table extends Migration
                 'description' => $this->text(),
                 'price' => $this->decimal(10, 2),
                 'status' => $this->integer(),
-                'createdAt' => $this->integer()->notNull(),
-                'updatedAt' => $this->integer()->notNull(),
-                'deletedAt' => $this->integer(),
+                'created_at' => $this->integer()->notNull(),
+                'updated_at' => $this->integer()->notNull(),
+                'deleted_at' => $this->integer(),
             ], $this->getTableOptions());
         }
     }
