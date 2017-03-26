@@ -30,7 +30,7 @@ return [
     'Reset' => '',
     'Search' => '',
     'Status' => '',
-    'Title' => '',
+    'Name' => '',
     'Update' => '',
     'Update {modelClass}: ' => '',
     'Updated At' => '',

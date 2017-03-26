@@ -43,7 +43,7 @@ class ProductSearch extends ParentProductSearch
         }
         return array_merge([
             [['id', 'status', 'createdAt', 'updatedAt'], 'integer'],
-            [['title', 'image', 'description'], 'safe'],
+            [['name', 'image', 'description'], 'safe'],
             [['price'], 'number'],
         ], [[$fields, 'safe']]);
     }
@@ -92,7 +92,7 @@ class ProductSearch extends ParentProductSearch
             }
         }
 
-        $query->andFilterWhere(['like', 'title', $this->title])
+        $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'description', $this->description]);
 

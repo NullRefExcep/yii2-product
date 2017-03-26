@@ -13,5 +13,5 @@ interface IProduct
 
     public function getPrice();
 
-    public function getTitle();
+    public function getName();
 }

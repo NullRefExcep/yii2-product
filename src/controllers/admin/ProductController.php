@@ -1,6 +1,6 @@
 <?php
 
-namespace nullref\product\controllers;
+namespace nullref\product\controllers\admin;
 
 use nullref\core\interfaces\IAdminController;
 use nullref\product\models\Product;
@@ -13,7 +13,7 @@ use yii\web\NotFoundHttpException;
 /**
  * AdminController implements the CRUD actions for Product model.
  */
-class AdminController extends Controller implements IAdminController
+class ProductController extends Controller implements IAdminController
 {
     public function behaviors()
     {

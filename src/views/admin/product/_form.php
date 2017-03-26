@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 

@@ -11,7 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%product}}".
  *
  * @property integer $id
- * @property string $title
+ * @property string $name
  * @property string $image
  * @property string $description
  * @property string $price
@@ -36,9 +36,9 @@ class Product extends BaseModel implements IProduct
         return $this->id;
     }
 
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
@@ -67,9 +67,9 @@ class Product extends BaseModel implements IProduct
             [['description'], 'string'],
             [['status'], 'integer'],
             [['price'], 'number'],
-            [['price', 'title'], 'required'],
+            [['price', 'name'], 'required'],
             [['createdAt', 'updatedAt'], 'safe'],
-            [['title', 'image'], 'string', 'max' => 255]
+            [['name', 'image'], 'string', 'max' => 255]
         ], parent::rules());
     }
 
@@ -80,7 +80,7 @@ class Product extends BaseModel implements IProduct
     {
         return array_merge([
             'id' => Yii::t('product', 'ID'),
-            'title' => Yii::t('product', 'Title'),
+            'name' => Yii::t('product', 'Name'),
             'image' => Yii::t('product', 'Image'),
             'picture' => Yii::t('product', 'Image'),
             'description' => Yii::t('product', 'Description'),

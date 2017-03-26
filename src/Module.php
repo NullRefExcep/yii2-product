@@ -16,6 +16,32 @@ class Module extends BaseModule implements IAdminModule
 {
     public $productModel = 'nullref\product\models\Product';
 
+    public static function getAdminMenu()
+    {
+        return [
+            'label' => Yii::t('product', 'Products'),
+            'icon' => 'archive',
+            'order' => 2,
+            'items' => [
+                [
+                    'label' => Yii::t('cms', 'Prototypes'),
+                    'icon' => 'copy',
+                    'url' => '/product/admin/prototype',
+                ],
+                [
+                    'label' => Yii::t('cms', 'Products'),
+                    'icon' => 'archive',
+                    'url' => '/product/admin/product',
+                ],
+                [
+                    'label' => Yii::t('cms', 'Option'),
+                    'icon' => 'list',
+                    'url' => '/product/admin/option',
+                ]
+            ],
+        ];
+    }
+
     public function init()
     {
         parent::init();
@@ -29,15 +55,6 @@ class Module extends BaseModule implements IAdminModule
         $this->setComponents([
             'productManager' => $config
         ]);
-    }
-
-    public static function getAdminMenu()
-    {
-        return [
-            'label' => Yii::t('product', 'Products'),
-            'url' => ['/product/admin'],
-            'icon' => 'archive',
-        ];
     }
 
 }
