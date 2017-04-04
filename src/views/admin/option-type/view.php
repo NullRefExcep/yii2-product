@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model nullref\product\models\Product */
+/* @var $model nullref\product\models\option\Type */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('product', 'Products'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('product', 'Types'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-view">
+<div class="type-view">
 
     <div class="row">
         <div class="col-lg-12">
@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <p>
+        <?= Html::a(Yii::t('product', 'List'), ['index'], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('product', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('product', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -36,12 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'image',
-            'description:ntext',
-            'price',
-            'status',
-            'created_at:datetime',
-            'updated_at:datetime',
         ],
     ]) ?>
 

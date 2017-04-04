@@ -9,16 +9,19 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('product', 'Prototypes');
 $this->params['breadcrumbs'][] = $this->title;
+
+/** @var \nullref\product\components\ProductTypes $productTypes */
+$productTypes = Yii::$app->getModule('product')->get('types');
 ?>
 <div class="prototype-index">
 
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            <?= Html::encode($this->title) ?>
-        </h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                <?= Html::encode($this->title) ?>
+            </h1>
+        </div>
     </div>
-</div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -32,9 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
-            'type',
+            [
+                'attribute' => 'type',
+                'filter' => $productTypes->getList(),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

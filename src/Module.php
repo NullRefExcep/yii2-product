@@ -37,10 +37,11 @@ class Module extends BaseModule implements IAdminModule
                     'label' => Yii::t('cms', 'Option'),
                     'icon' => 'list',
                     'url' => '/product/admin/option',
-                ]
+                ],
             ],
         ];
     }
+
 
     public function init()
     {
@@ -53,7 +54,8 @@ class Module extends BaseModule implements IAdminModule
         }
         $config = EntityManager::getConfig('nullref\\product\\models\\', 'Product', $config);
         $this->setComponents([
-            'productManager' => $config
+            'productManager' => $config,
+            'types' => Yii::createObject('nullref\product\components\ProductTypes'),
         ]);
     }
 

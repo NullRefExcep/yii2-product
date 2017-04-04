@@ -3,17 +3,17 @@
 namespace nullref\product\controllers\admin;
 
 use Yii;
-use nullref\product\models\Prototype;
-use nullref\product\models\PrototypeSearch;
+use nullref\product\models\option\Type;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use nullref\core\interfaces\IAdminController;
 
 /**
- * PrototypeController implements the CRUD actions for Prototype model.
+ * OptionTypeController implements the CRUD actions for Type model.
  */
-class PrototypeController extends Controller implements IAdminController
+class OptionTypeController extends Controller implements IAdminController
 {
     public function behaviors()
     {
@@ -28,22 +28,22 @@ class PrototypeController extends Controller implements IAdminController
     }
 
     /**
-     * Lists all Prototype models.
+     * Lists all Type models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PrototypeSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Type::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Prototype model.
+     * Displays a single Type model.
      * @param integer $id
      * @return mixed
      */
@@ -55,16 +55,16 @@ class PrototypeController extends Controller implements IAdminController
     }
 
     /**
-     * Creates a new Prototype model.
+     * Creates a new Type model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Prototype();
+        $model = new Type();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -73,7 +73,7 @@ class PrototypeController extends Controller implements IAdminController
     }
 
     /**
-     * Updates an existing Prototype model.
+     * Updates an existing Type model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -92,7 +92,7 @@ class PrototypeController extends Controller implements IAdminController
     }
 
     /**
-     * Deletes an existing Prototype model.
+     * Deletes an existing Type model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -105,15 +105,15 @@ class PrototypeController extends Controller implements IAdminController
     }
 
     /**
-     * Finds the Prototype model based on its primary key value.
+     * Finds the Type model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Prototype the loaded model
+     * @return Type the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Prototype::findOne($id)) !== null) {
+        if (($model = Type::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

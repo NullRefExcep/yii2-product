@@ -4,6 +4,7 @@ namespace nullref\product\models;
 
 use nullref\core\behaviors\SoftDelete;
 use nullref\core\models\Model as BaseModel;
+use nullref\useful\traits\GetDefinition;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -23,6 +24,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Product extends BaseModel implements IProduct
 {
+    use GetDefinition;
+
     const STATUS_ENABLE = 1;
     const STATUS_DISABLE = 1;
 

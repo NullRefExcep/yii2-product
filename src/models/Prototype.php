@@ -28,6 +28,8 @@ class Prototype extends ActiveRecord
     public function rules()
     {
         return [
+            ['name', 'unique'],
+            ['name', 'required'],
             [['name', 'type'], 'string', 'max' => 255],
         ];
     }
