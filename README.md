@@ -4,6 +4,23 @@ Yii2 Product
 
 Module for products management
 
+!!! This project is under development and not ready for production !!!
+-----------------------------
+ 
+**The main idea of this package is providing a flexible way to configure product entities at the website.**
+
+**For those purposes, now we have another solution that calls [EAV](https://github.com/NullRefExcep/yii2-eav).**
+
+**At this moment  we recommend you to check it instead of this package.**
+
+
+Main features
+-------------
+
+- configure different types of products (e.g. configurable, grouped, simple)
+- defining properties and options for products entities
+- ability to extend base features to add new types of products and properties
+
 Installation
 ------------
 
